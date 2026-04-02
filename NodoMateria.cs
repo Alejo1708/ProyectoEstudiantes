@@ -1,4 +1,4 @@
-sing System;
+using System;
 
 // Esta clase representa un NODO dentro de la lista enlazada de materias
 // Cada nodo almacena la informacion de una materia especifica
