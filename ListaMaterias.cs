@@ -97,3 +97,40 @@ public class ListaMaterias
 
         Console.WriteLine("Materia no encontrada."); // Si no se encontro la materia
     }
+    // Eliminar materia
+    public void Eliminar(string nombre)  // Metodo para eliminar una materia de la lista
+    {
+        if (cabeza == null)  // Verifica si la lista esta vacia
+        {
+            Console.WriteLine("Lista vacia.");
+            return;
+        }
+
+
+// Si la materia que se va a eliminar esta en la cabeza
+        if (cabeza.Nombre.ToLower() == nombre.ToLower()) 
+        {
+            cabeza = cabeza.Siguiente;
+            Console.WriteLine("Materia eliminada.");
+            return;
+        }
+
+        NodoMateria actual = cabeza;
+
+        while (actual.Siguiente != null)   // Se recorre la lista buscando el nodo anterior al que se desea eliminar
+        {
+            if (actual.Siguiente.Nombre.ToLower() == nombre.ToLower())
+            {
+                
+                // Se salta el nodo a eliminar
+                actual.Siguiente = actual.Siguiente.Siguiente;
+                Console.WriteLine("Materia eliminada.");
+                return;
+            }
+
+            actual = actual.Siguiente;
+        }
+// Si no se encontro la materia
+        Console.WriteLine("Materia no encontrada.");
+    }
+}
