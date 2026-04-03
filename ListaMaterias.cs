@@ -58,3 +58,42 @@ public class ListaMaterias
 
         Console.WriteLine("Materia agregada correctamente.");
     }
+    // Listar materias
+    public void Listar()   // Metodo para listar todas las materias de la lista
+    {
+        if (cabeza == null) // Si la lista esta vacia, se informa al usuario
+        {
+            Console.WriteLine("No hay materias.");
+            return;
+        }
+
+        NodoMateria actual = cabeza;
+
+        while (actual != null) // Se recorre toda la lista mostrando cada materia
+        {
+            Console.WriteLine("Materia: " + actual.Nombre + " - Nota: " + actual.Nota);
+            actual = actual.Siguiente;
+        }
+    }
+
+    // Modificar nota
+    public void Modificar(string nombre, double nuevaNota)  // Metodo para modificar la nota de una materia existente
+    {
+        NodoMateria actual = cabeza;
+
+        while (actual != null)    // Se recorre la lista buscando la materia
+        {
+            if (actual.Nombre.ToLower() == nombre.ToLower())  // Comparacion sin importar mayusculas o minusculas
+            {
+               
+               // Se actualiza la nota
+                actual.Nota = nuevaNota;  
+                Console.WriteLine("Nota actualizada.");
+                return;
+            }
+
+            actual = actual.Siguiente;
+        }
+
+        Console.WriteLine("Materia no encontrada."); // Si no se encontro la materia
+    }
