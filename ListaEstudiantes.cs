@@ -30,3 +30,86 @@ public class ListaEstudiantes
     {
         return email.Contains("@");
     }
+
+    // Agregar estudiante
+    public void Agregar()    // Metodo para agregar un nuevo estudiante a la lista
+    {
+       
+       // Se piden los datos al usuario
+        Console.Write("Nombre: ");
+        string nombre = Console.ReadLine();
+
+        Console.Write("Apellido: ");
+        string apellido = Console.ReadLine();
+
+        Console.Write("Direccion: ");
+        string direccion = Console.ReadLine();
+
+        string celular;
+         // Se valida que el celular sea solo numeros
+        do
+        {
+            Console.Write("Celular (solo numeros): ");
+            celular = Console.ReadLine();
+        } while (!ValidarCelular(celular));
+
+        string email;
+        // Se valida que el email tenga @
+        do
+        {
+            Console.Write("Email: ");
+            email = Console.ReadLine();
+        } while (!ValidarEmail(email));
+
+        
+        
+        // Se crea el nuevo nodo con un codigo automatico
+        NodoEstudiantes nuevo = new NodoEstudiantes(contador, nombre, apellido, direccion, celular, email);
+        contador++;
+
+        if (cabeza == null)  // Si la lista esta vacia, el nodo se convierte en la cabeza
+        {
+            cabeza = nuevo;
+        }
+        else
+        {
+            
+             // Si no, se recorre hasta el ultimo nodo
+            NodoEstudiantes actual = cabeza;  
+            while (actual.Siguiente != null)
+            {
+                actual = actual.Siguiente;
+            }
+            actual.Siguiente = nuevo; // Se enlaza el nuevo nodo al final
+        }
+
+        Console.WriteLine("Estudiante agregado.");
+    }
+
+    // Listar estudiantes
+    public void Listar()  // Metodo para listar todos los estudiantes
+    {
+        NodoEstudiantes actual = cabeza;
+
+        while (actual != null) // Recorre toda la lista mostrando los datos
+        {
+            Console.WriteLine("Codigo: " + actual.Codigo + " - " + actual.Nombre + " " + actual.Apellido);
+            actual = actual.Siguiente;
+        }
+    }
+
+    // Buscar estudiante
+    public NodoEstudiantes Buscar(int codigo)  // Metodo para buscar un estudiante por codigo
+    {
+        NodoEstudiantes actual = cabeza;
+
+        while (actual != null)   // Recorre la lista buscando coincidencia
+        {
+            if (actual.Codigo == codigo)
+                return actual;
+
+            actual = actual.Siguiente;
+        }
+
+        return null;  // Si no se encuentra, retorna null
+    }
