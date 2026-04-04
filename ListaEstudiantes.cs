@@ -113,3 +113,40 @@ public class ListaEstudiantes
 
         return null;  // Si no se encuentra, retorna null
     }
+
+    // Eliminar estudiante
+    public void Eliminar(int codigo) // Metodo para eliminar un estudiante por codigo
+    {
+        if (cabeza == null) // Verifica si la lista esta vacia
+        {
+            Console.WriteLine("Lista vacia.");
+            return;
+        }
+
+      
+      // Si el estudiante que se quiere eliminar es el primero de la lista
+        if (cabeza.Codigo == codigo)
+        {
+            cabeza = cabeza.Siguiente;
+            Console.WriteLine("Eliminado.");
+            return;
+        }
+
+        NodoEstudiantes actual = cabeza;
+
+        while (actual.Siguiente != null) // Se busca el nodo anterior al que se quiere eliminar
+        {
+            if (actual.Siguiente.Codigo == codigo)
+            {
+                actual.Siguiente = actual.Siguiente.Siguiente;  // Se salta el nodo a eliminar
+                Console.WriteLine("Eliminado.");
+                return;
+            }
+
+            actual = actual.Siguiente;
+        }
+
+
+        Console.WriteLine("No encontrado.");
+    }
+}
