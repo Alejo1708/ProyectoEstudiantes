@@ -56,3 +56,31 @@ class Program
                     Console.Write("Codigo: ");
                     lista.Eliminar(int.Parse(Console.ReadLine()));
                     break;
+
+
+                 case 5:     // Gestion de materias de un estudiante especifico
+                    Console.Write("Codigo estudiante: ");
+                    int codigo = int.Parse(Console.ReadLine());
+                    var estudiante = lista.Buscar(codigo);
+
+
+                     // Si no existe el estudiante, no se puede continuar
+                    if (estudiante == null)
+                    {
+                        Console.WriteLine("No existe.");
+                        break;
+                    }
+
+                    int op2; // Variable para el submenu de materias
+
+                    // Submenu de materias
+                    do
+                    {
+                        Console.WriteLine("\n--- MATERIAS ---");
+                        Console.WriteLine("1. Agregar");
+                        Console.WriteLine("2. Listar");
+                        Console.WriteLine("3. Modificar nota");
+                        Console.WriteLine("4. Eliminar");
+                        Console.WriteLine("5. Volver");
+
+                        op2 = int.Parse(Console.ReadLine());
