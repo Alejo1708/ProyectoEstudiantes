@@ -84,3 +84,56 @@ class Program
                         Console.WriteLine("5. Volver");
 
                         op2 = int.Parse(Console.ReadLine());
+
+
+                        switch (op2)
+                        {
+                            case 1:         // Agregar una nueva materia
+                                Console.Write("Nombre: ");
+                                string nom = Console.ReadLine();
+
+                                double nota;
+                                
+                                 // Se valida que la nota este entre 0 y 5
+                                do
+                                {
+                                    Console.Write("Nota (0 a 5): ");
+                                    nota = double.Parse(Console.ReadLine());
+                                } while (nota < 0 || nota > 5);
+
+                                estudiante.ListaMaterias.Agregar(nom, nota);
+                                break;
+
+                            case 2:      // Listar todas las materias del estudiante
+                                estudiante.ListaMaterias.Listar();
+                                break;
+
+                            case 3:   // Modificar la nota de una materia
+                                Console.Write("Materia: ");
+                                string mat = Console.ReadLine();
+
+                                double nueva;
+                                
+                                // Validar la nueva nota
+                                do
+                                {
+                                    Console.Write("Nueva nota (0 a 5): ");
+                                    nueva = double.Parse(Console.ReadLine());
+                                } while (nueva < 0 || nueva > 5);
+
+                                estudiante.ListaMaterias.Modificar(mat, nueva);
+                                break;
+
+                            case 4:    // Eliminar una materia por nombre
+                                Console.Write("Materia: ");
+                                estudiante.ListaMaterias.Eliminar(Console.ReadLine());
+                                break;
+                        }
+
+                    } while (op2 != 5);  // Se repite hasta que el usuario quiera volver
+                    break;
+            }
+
+        } while (opcion != 6);   // El programa termina cuando el usuario elige salir
+    }
+}
