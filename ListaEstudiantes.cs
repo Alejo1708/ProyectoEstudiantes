@@ -89,6 +89,12 @@ public class ListaEstudiantes
     // Listar estudiantes
     public void Listar()  // Metodo para listar todos los estudiantes
     {
+        if (cabeza == null)
+    {
+        Console.WriteLine("No hay estudiantes.");
+        return;
+    }
+       
         NodoEstudiantes actual = cabeza;
 
         while (actual != null) // Recorre toda la lista mostrando los datos
