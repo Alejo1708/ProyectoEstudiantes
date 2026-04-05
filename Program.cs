@@ -25,9 +25,12 @@ class Program
             Console.WriteLine("6. Salir");
 
            // Se lee la opcion del usuario
-            opcion = int.Parse(Console.ReadLine());
-
-            
+           //MEJORA: Se usa TryParse  para evitar errores si el usuario ingresa texto
+           while (!int.TryParse(Console.ReadLine(), out opcion))
+            {
+                Console.Write("Ingrese una opcion valida: ");
+            }
+    
              // Se evalua la opcion elegida
             switch (opcion)
             {
@@ -41,7 +44,14 @@ class Program
 
                 case 3:     // Permite buscar un estudiante por codigo
                     Console.Write("Codigo: ");
-                    int cod = int.Parse(Console.ReadLine());
+                    //mejora: validacion segura del codigo
+                    int cod;
+                     
+                     while (!int.TryParse(Console.ReadLine(), out cod))
+                    {
+                        Console.Write("Ingrese un codigo valido: ");
+                    }
+
                     var est = lista.Buscar(cod);
 
                     
@@ -54,13 +64,26 @@ class Program
 
                 case 4:         // Permite eliminar un estudiante por codigo
                     Console.Write("Codigo: ");
-                    lista.Eliminar(int.Parse(Console.ReadLine()));
+                     //mejora: validacion segura del codigo
+                    int codEliminar;
+
+                    while (!int.TryParse(Console.ReadLine(), out codEliminar))
+                    {
+                        Console.Write("Ingrese un codigo valido: ");
+                    }
+
+                    lista.Eliminar(codEliminar);
                     break;
 
 
                  case 5:     // Gestion de materias de un estudiante especifico
                     Console.Write("Codigo estudiante: ");
-                    int codigo = int.Parse(Console.ReadLine());
+                    //mejora: validacion segura del codigo
+                    int codigo;
+                    while (!int.TryParse(Console.ReadLine(), out codigo))
+                    {
+                        Console.Write("Ingrese un codigo valido: ");
+                    }
                     var estudiante = lista.Buscar(codigo);
 
 
@@ -83,8 +106,11 @@ class Program
                         Console.WriteLine("4. Eliminar");
                         Console.WriteLine("5. Volver");
 
-                        op2 = int.Parse(Console.ReadLine());
-
+                       //mejora: validacion de opcion del submenu
+                        while (!int.TryParse(Console.ReadLine(), out op2))
+                        {
+                            Console.Write("Ingrese una opcion valida: ");
+                        }
 
                         switch (op2)
                         {
@@ -93,13 +119,13 @@ class Program
                                 string nom = Console.ReadLine();
 
                                 double nota;
-                                
                                  // Se valida que la nota este entre 0 y 5
-                                do
+                                 //mejora: se usa TryParse para evitar errores
+                               while (!double.TryParse(Console.ReadLine(), out nota) || nota < 0 || nota > 5)
                                 {
-                                    Console.Write("Nota (0 a 5): ");
-                                    nota = double.Parse(Console.ReadLine());
-                                } while (nota < 0 || nota > 5);
+                                    Console.Write("Ingrese una nota valida (0 a 5): ");
+                                }
+
 
                                 estudiante.ListaMaterias.Agregar(nom, nota);
                                 break;
@@ -115,12 +141,12 @@ class Program
                                 double nueva;
                                 
                                 // Validar la nueva nota
-                                do
+                                //mejora: se usa TryParse para evitar errores
+                               while (!double.TryParse(Console.ReadLine(), out nueva) || nueva < 0 || nueva > 5)
                                 {
-                                    Console.Write("Nueva nota (0 a 5): ");
-                                    nueva = double.Parse(Console.ReadLine());
-                                } while (nueva < 0 || nueva > 5);
-
+                                    Console.Write("Ingrese una nota valida (0 a 5): ");
+                                }
+                               
                                 estudiante.ListaMaterias.Modificar(mat, nueva);
                                 break;
 
